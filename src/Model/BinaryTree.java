@@ -53,6 +53,7 @@ public class BinaryTree<ContentType> {
 	 */
 	public BinaryTree() {
 		//TODO 01a
+		this.node = node;
 	}
 
 	/**
@@ -66,6 +67,9 @@ public class BinaryTree<ContentType> {
 	 */
 	public BinaryTree(ContentType pContent) {
 		//TODO 01b
+		if(pContent!=null){
+			this.node = new BTNode<ContentType>(pContent);
+		}
 	}
 
 	/**
@@ -85,6 +89,15 @@ public class BinaryTree<ContentType> {
 	 */
 	public BinaryTree(ContentType pContent, BinaryTree<ContentType> pLeftTree, BinaryTree<ContentType> pRightTree) {
 		//TODO 01c
+		if(pContent!=null){
+			this.node = new BTNode<ContentType>(pContent);
+			if(pLeftTree!=null){
+				node.left = pLeftTree;
+			}
+			if(pRightTree!=null){
+				node.right = pRightTree;
+			}
+		}
 	}
 
 	/**
@@ -95,6 +108,9 @@ public class BinaryTree<ContentType> {
 	 */
 	public boolean isEmpty() {
 		//TODO 01d
+		if(node!=null){
+			return true;
+		}
 		return false;
 	}
 
@@ -110,6 +126,13 @@ public class BinaryTree<ContentType> {
 	 */
 	public void setContent(ContentType pContent) {
 		//TODO 01e
+		if(pContent!=null) {
+			if (node != null) {
+				node.content = pContent;
+			}else{
+				node = new BTNode<ContentType>(pContent);
+			}
+		}
 	}
 
 	/**
@@ -121,6 +144,9 @@ public class BinaryTree<ContentType> {
 	 */
 	public ContentType getContent() {
 		//TODO 01f
+		if(node!=null){
+			return node.content;
+		}
 		return null;
 	}
 
@@ -134,6 +160,9 @@ public class BinaryTree<ContentType> {
 	 */
 	public void setLeftTree(BinaryTree<ContentType> pTree) {
 		//TODO 01g
+		if(node!=null && pTree!=null){
+			node.left = pTree;
+		}
 	}
 
 	/**
@@ -146,6 +175,9 @@ public class BinaryTree<ContentType> {
 	 */
 	public void setRightTree(BinaryTree<ContentType> pTree) {
 		//TODO 01h
+		if(node!=null && pTree!=null){
+			node.right = pTree;
+		}
 	}
 
 	/**
@@ -157,6 +189,9 @@ public class BinaryTree<ContentType> {
 	 */
 	public BinaryTree<ContentType> getLeftTree() {
 		//TODO 01i
+		if(node!=null){
+			return node.left;
+		}
 		return null;
 	}
 
@@ -169,6 +204,9 @@ public class BinaryTree<ContentType> {
 	 */
 	public BinaryTree<ContentType> getRightTree() {
 		//TODO 01j
+		if(node!=null){
+			return node.right;
+		}
 		return null;
 	}
 
