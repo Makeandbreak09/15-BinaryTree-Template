@@ -108,7 +108,7 @@ public class BinaryTree<ContentType> {
 	 */
 	public boolean isEmpty() {
 		//TODO 01d
-		if(node!=null){
+		if(node==null){
 			return true;
 		}
 		return false;

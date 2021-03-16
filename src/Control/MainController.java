@@ -3,6 +3,7 @@ package Control;
 import Model.BinaryTree;
 import View.DrawingPanel;
 import View.TreeView.TreeNode;
+import View.TreeView.TreePath;
 
 /**
  * Created by Jean-Pierre on 12.01.2017.
@@ -47,7 +48,7 @@ public class MainController {
     /**
      * Hilfsmethode zum Zeichnen des Baums.
      * Für jeden Knoten wird ein neues TreeNode-Objekt dem panel hinzugefügt.
-     * Für jede Kante wird ein neues TreePath-Pbjekt dem panel hinzugefügt.
+     * Für jede Kante wird ein neues TreePath-Objekt dem panel hinzugefügt.
      * @param tree Der zu zeichnende (Teil)Binärbaum.
      * @param panel Das DrawingPanel-Objekt, auf dem gezeichnet wird.
      * @param startX x-Koordinate seiner Wurzel
@@ -56,13 +57,19 @@ public class MainController {
      */
     private void showTree(BinaryTree tree, DrawingPanel panel, double startX, double startY, double spaceToTheSide) {
         //TODO 03: Vervollständige diese Methode. Aktuell wird nur der Wurzelknoten gezeichnet.
+        int radius = 10;
         if (!tree.isEmpty()) {
-            TreeNode node = new TreeNode(startX, startY, 10, tree.getContent().toString(), false);
+            TreeNode node = new TreeNode(startX, startY, radius, tree.getContent().toString(), false);
             panel.addObject(node);
+            if(!tree.getLeftTree().isEmpty()) {
+                panel.addObject(new TreePath(startX, startY+2*radius, startX-spaceToTheSide, startY+100-2*radius, 0, false));
+                showTree(tree.getLeftTree(), panel, startX - spaceToTheSide, startY + 100, spaceToTheSide / 2);
+            }
+            if(!tree.getRightTree().isEmpty()) {
+                panel.addObject(new TreePath(startX, startY+2*radius, startX + spaceToTheSide, startY + 100-2*radius, 0, false));
+                showTree(tree.getRightTree(), panel, startX + spaceToTheSide, startY + 100, spaceToTheSide / 2);
+            }
         }
-		
-		
-		
     }
 
     /**
@@ -81,6 +88,17 @@ public class MainController {
      */
     private String traverse(BinaryTree tree){
         //TODO 04: Nachdem wir geklärt haben, was eine Traversierung ist, muss diese Methode noch vervollständigt werden. Sollte ein Kinderspiel sein.
-        return "Traverse? Wat dat denn?";
+        if (!tree.isEmpty()) {
+            String left = "";
+            String right = "";
+            if(!tree.getLeftTree().isEmpty()) {
+                left = traverse(tree.getLeftTree());
+            }
+            if(!tree.getRightTree().isEmpty()) {
+                right = traverse(tree.getRightTree());
+            }
+            return tree.getContent()+left+right;
+        }
+        return null;
     }
 }
