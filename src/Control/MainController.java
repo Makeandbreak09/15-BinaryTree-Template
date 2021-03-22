@@ -78,7 +78,7 @@ public class MainController {
      * @return Das Ergebnis der Traversierung als Zeichenkette.
      */
     public String traverse(){
-        return traverse(binaryTree);
+        return traverse(binaryTree)+"\n Nodes: "+countNodes(binaryTree);
     }
 
     /**
@@ -100,5 +100,18 @@ public class MainController {
             return tree.getContent()+left+right;
         }
         return null;
+    }
+
+    /**
+     * Interne Übungsmethode zur Traversierung.
+     * @param tree Der zu traversierende Binärbaum.
+     * @return Die Anzahl der Knoten in diesem Baum
+     */
+    private int countNodes(BinaryTree tree){
+        //TODO 05: Übungsmethode
+        if (!tree.isEmpty()) {
+            return 1+countNodes(tree.getLeftTree())+countNodes(tree.getRightTree());
+        }
+        return 0;
     }
 }
